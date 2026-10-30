@@ -71,3 +71,10 @@ I used a `switch` statement to choose an HTML file based on `req.url`. The homep
 ### Status codes
 
 I set `res.statusCode` to `200` for the homepage and About page, and `404` for unknown routes. This tells the client the response status alongside the HTML page.
+
+### Redirects
+
+I used status code `301` and the `Location` header to permanently redirect `/about-me` to `/about`.
+
+Working with routing, headers and responses directly in Node.js helps me understand what Express will simplify later.
+

@@ -22,7 +22,7 @@ const server = http.createServer((req, res) => {
   // res.write("<p>Hello, again turtle</p>");
 
   // Simple routing system.
-  // Choose an HTML page and set its HTTP status: 200 for matched routes, 404 otherwise.
+  // Serve HTML pages, redirect an old URL, or return a 404 page.
   let path = "./views/";
   switch (req.url) {
     case "/":
@@ -33,6 +33,12 @@ const server = http.createServer((req, res) => {
       path += "about.html";
       res.statusCode = 200;
       break;
+    case "/about-me":
+      // Permanently redirect the old URL to /about and end this request.
+      res.statusCode = 301;
+      res.setHeader("Location", "/about");
+      res.end();
+      return;
     default:
       path += "404.html";
       res.statusCode = 404;
