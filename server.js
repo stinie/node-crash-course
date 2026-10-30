@@ -1,5 +1,7 @@
 // Import Node.js's built-in http module.
 const http = require("http");
+// Import Node.js's built-in file system module.
+const fs = require("fs");
 
 // Create a server and run this callback for each incoming request.
 const server = http.createServer((req, res) => {
@@ -15,12 +17,24 @@ const server = http.createServer((req, res) => {
   // res.write("Hello, turtle");
 
   // Write an HTML response.
-  res.write("<head><link rel='stylesheet' href='#'></head>");
-  res.write("<p>Hello, turtle</p>");
-  res.write("<p>Hello, again turtle</p>");
+  // res.write("<head><link rel='stylesheet' href='#'></head>");
+  // res.write("<p>Hello, turtle</p>");
+  // res.write("<p>Hello, again turtle</p>");
+
+  // Send an HTML file.
+  fs.readFile("./views/index.html", (err, data) => {
+    if (err) {
+      console.log(err);
+      res.end();
+    } else {
+      // res.write(data);
+      // res.end();
+      res.end(data); // Send the file data and end the response.
+    }
+  });
 
   // End the response.
-  res.end();
+  // res.end();
 });
 
 // Listen on localhost:3000 and log when the server is ready.

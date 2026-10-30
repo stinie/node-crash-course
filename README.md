@@ -54,6 +54,12 @@ I used `pipe()` to pass data from a readable stream to a writable stream. `creat
 
 ## Lesson 4 - Requests & Responses
 
+### Inspecting requests and sending HTML
+
 I inspected the request URL and HTTP method, set the response content type, and sent HTML using `res.write()` and `res.end()`.
 
 When running with `node server.js`, I need to restart the server after changing the code.
+
+### Sending an HTML file
+
+I used `fs.readFile()` to read an HTML file asynchronously and send its contents with `res.end(data)`. If reading fails, the server logs the error and ends the response.
