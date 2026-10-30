@@ -63,3 +63,8 @@ When running with `node server.js`, I need to restart the server after changing 
 ### Sending an HTML file
 
 I used `fs.readFile()` to read an HTML file asynchronously and send its contents with `res.end(data)`. If reading fails, the server logs the error and ends the response.
+
+### Simple routing
+
+I used a `switch` statement to choose an HTML file based on `req.url`. The homepage and About page have their own routes; other URLs show a 404 page.
+
