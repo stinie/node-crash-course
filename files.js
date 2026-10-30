@@ -1,4 +1,4 @@
-// Import File System core module
+// Import Node.js's built-in file system module.
 const fs = require("fs");
 
 // Read a file asynchronously.

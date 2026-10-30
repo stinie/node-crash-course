@@ -45,3 +45,9 @@ I practised reading, writing and deleting files, and creating and removing direc
 I learned that `existsSync()` checks synchronously, while the callback-based file operations run asynchronously. Missing files can produce `ENOENT`; creating an existing directory can produce `EEXIST`.
 
 Logging an error does not stop a callback. I added an early return when reading files to avoid calling `data.toString()` after a failed read. The other examples still follow the tutorial and can print success messages even when an operation fails.
+
+### Streams
+
+I practised reading and writing files in chunks using streams. UTF-8 encoding gives me readable text instead of Buffers.
+
+I used `pipe()` to pass data from a readable stream to a writable stream. `createWriteStream()` creates the output file if it is missing or overwrites it if it exists.
