@@ -30,3 +30,18 @@ I’m keeping `test.js` during Lesson 2 as a record of my code-along practice, e
 ### The global object
 
 I practised using Node.js timers and explored `__dirname` and `__filename`. Unlike the browser, Node.js has no built-in `document` object, so browser DOM code does not run here.
+
+### Modules and exports
+
+I practised exporting values with `module.exports` and loading them with `require()`. Without an explicit export, my module returned an empty object `{}`.
+
+I learned to use the whole exported object or destructure individual values, and to load Node.js’s built-in `os` module to read the platform and home directory.
+
+
+### Working with files and directories
+
+I practised reading, writing and deleting files, and creating and removing directories with Node.js’s `fs` module.
+
+I learned that `existsSync()` checks synchronously, while the callback-based file operations run asynchronously. Missing files can produce `ENOENT`; creating an existing directory can produce `EEXIST`.
+
+Logging an error does not stop a callback. I added an early return when reading files to avoid calling `data.toString()` after a failed read. The other examples still follow the tutorial and can print success messages even when an operation fails.
