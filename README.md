@@ -51,3 +51,9 @@ Logging an error does not stop a callback. I added an early return when reading 
 I practised reading and writing files in chunks using streams. UTF-8 encoding gives me readable text instead of Buffers.
 
 I used `pipe()` to pass data from a readable stream to a writable stream. `createWriteStream()` creates the output file if it is missing or overwrites it if it exists.
+
+## Lesson 4 - Requests & Responses
+
+I inspected the request URL and HTTP method, set the response content type, and sent HTML using `res.write()` and `res.end()`.
+
+When running with `node server.js`, I need to restart the server after changing the code.
