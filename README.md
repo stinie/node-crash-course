@@ -68,3 +68,6 @@ I used `fs.readFile()` to read an HTML file asynchronously and send its contents
 
 I used a `switch` statement to choose an HTML file based on `req.url`. The homepage and About page have their own routes; other URLs show a 404 page.
 
+### Status codes
+
+I set `res.statusCode` to `200` for the homepage and About page, and `404` for unknown routes. This tells the client the response status alongside the HTML page.
