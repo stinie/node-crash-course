@@ -20,3 +20,13 @@ node test.js
 ```
 
 The script prints `mario`. This is my first step towards understanding how JavaScript runs outside the browser.
+
+## Lesson 2 — Node.js Basics
+
+### Keeping earlier practice files
+
+I’m keeping `test.js` during Lesson 2 as a record of my code-along practice, even though it is absent from the instructor’s `lesson-2` branch. I may remove it in a later lesson; it will remain preserved on the earlier branches.
+
+### The global object
+
+I practised using Node.js timers and explored `__dirname` and `__filename`. Unlike the browser, Node.js has no built-in `document` object, so browser DOM code does not run here.
