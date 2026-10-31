@@ -15,9 +15,15 @@ app.listen(3000);
 
 // Respond to GET requests for the homepage.
 app.get("/", (req, res) => {
-  // res.render("index");
+  const blogs = [
+    { title: "Yoshi finds eggs", snippet: "A little curiosity leads Yoshi to a colourful discovery." },
+    { title: "Mario finds stars", snippet: "Every star marks another small adventure completed." },
+    { title: "How to turtle pace", snippet: "Take your time, understand each step, and keep moving. 🐢" }
+  ];
   res.render("index", {
-    title: "Home"
+    title: "Home",
+    // Shorthand for blogs: blogs because the property and variable names match.
+    blogs
   });
 });
 

@@ -156,3 +156,11 @@ I now pass a `title` from each route through the second argument of `res.render(
 ```
 
 I deleted the old HTML files from `views/` and removed earlier commented-out code as I became comfortable with the EJS approach. Previous versions remain preserved in Git.
+
+### Displaying blog data
+
+I created an array of sample blogs in `app.js` and passed it to `index.ejs` through `res.render()`. I learned that `blogs` is shorthand for `blogs: blogs` when the property and variable names match.
+
+In EJS, I used plain JavaScript (“vanilla JavaScript”) to check `blogs.length`, loop with `forEach()`, and show a fallback message when the array is empty.
+
+I displayed each blog’s title and snippet with `<%= %>` and added EJS comments with `<%# %>`. I’m getting used to reading JavaScript mixed with HTML inside the templates.

@@ -24,6 +24,16 @@
   </nav>
   <div class="blogs content">
     <h2>All Blogs</h2>
+    <%# If blogs are available, loop through them and create a heading and paragraph for each blog. %>
+    <% if (blogs.length > 0) { %>
+      <% blogs.forEach(blog => { %>
+        <h3 class="title"><%= blog.title %></h3>
+        <p class="snippet"><%= blog.snippet %></p>
+      <% }) %>
+    <% } else { %>
+      <%# Show a fallback message when the blogs array is empty. %>
+      <p>There are no blogs to display.</p>
+    <% } %>
   </div>
 </body>
 
