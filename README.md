@@ -78,3 +78,17 @@ I used status code `301` and the `Location` header to permanently redirect `/abo
 
 Working with routing, headers and responses directly in Node.js helps me understand what Express will simplify later.
 
+## Lesson 5 — NPM
+
+I ran `npm init` to create `package.json`, then installed nodemon locally as a development dependency instead of globally:
+
+```bash
+npm install nodemon --save-dev
+npm i --save lodash
+```
+
+The first installation created `package-lock.json` and `node_modules/`, which was already in my `.gitignore`. Lodash is a regular dependency; nodemon is a development tool.
+
+Using knowledge from a previous project, I added scripts: `npm start` runs the server, and `npm run dev` runs it with nodemon to restart automatically after code changes.
+
+When downloading a project or restoring it without `node_modules/`, I can run `npm install` to install the dependencies listed in `package.json`.
