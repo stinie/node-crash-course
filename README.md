@@ -186,3 +186,16 @@ I typed the code myself while following the tutorial. For this step, I copied th
 Every page includes the head partial, so the styles are shared across the site. They add the Noto Serif font, a centred layout, navigation and footer styling, and formatting for the create-blog form.
 
 This completes Lesson 7: my pages now use EJS templates, dynamic data, reusable partials and shared styling.
+
+## Lesson 8 — Middleware (in progress)
+
+### Middleware order and next()
+
+I learned that middleware runs between an incoming request and its response. Route handlers are middleware too, but match a specific HTTP method and path.
+
+I added custom middleware to log the request’s hostname, path and method. Without sending a response or calling `next()`, it leaves the request waiting.
+
+Calling `next()` passes control to the next matching middleware or route handler. I added a second logger to follow this sequence and understand why registration order matters. My 404 handler stays last to handle unmatched requests.
+
+I kept the version without `next()` commented out as a reminder of what happens when control is not passed onward.
+

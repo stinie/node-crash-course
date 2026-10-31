@@ -13,6 +13,31 @@ app.set("view engine", "ejs");
 // Start the server on port 3000.
 app.listen(3000);
 
+// Without next() or a response, this middleware logs the request but leaves it waiting.
+// app.use((req, res) => {
+//   console.log("new request made");
+//   console.log("host: ", req.hostname);
+//   console.log("path: ", req.path);
+//   console.log("method: ", req.method);
+// });
+
+// Log the request, then call next() so Express can continue to the next matching handler.
+app.use((req, res, next) => {
+  console.log("new request made");
+  console.log("host: ", req.hostname);
+  console.log("path: ", req.path);
+  console.log("method: ", req.method);
+  next();
+});
+
+// Run after the previous middleware calls next(), then pass control onward with next().
+app.use((req, res, next) => {
+  console.log("the next middleware");
+  next();
+});
+
+
+
 // Respond to GET requests for the homepage.
 app.get("/", (req, res) => {
   const blogs = [
