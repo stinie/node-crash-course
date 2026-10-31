@@ -164,3 +164,17 @@ I created an array of sample blogs in `app.js` and passed it to `index.ejs` thro
 In EJS, I used plain JavaScript (“vanilla JavaScript”) to check `blogs.length`, loop with `forEach()`, and show a fallback message when the array is empty.
 
 I displayed each blog’s title and snippet with `<%= %>` and added EJS comments with `<%# %>`. I’m getting used to reading JavaScript mixed with HTML inside the templates.
+
+### Server-side rendering and partials
+
+I learned that EJS processes templates on the server, combining HTML with data and JavaScript logic. The browser receives the resulting HTML.
+
+I moved the shared head, navigation and footer into `views/partials/` and included them in my pages:
+
+```ejs
+<%- include("./partials/nav.ejs") %>
+```
+
+The `<%- %>` tag outputs HTML without escaping it, allowing the partial’s markup to render correctly.
+
+Using partials reduces duplication: I can update shared content in one place instead of editing every page. I also personalised the footer and credited The Net Ninja’s course.
