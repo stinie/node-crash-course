@@ -178,3 +178,11 @@ I moved the shared head, navigation and footer into `views/partials/` and includ
 The `<%- %>` tag outputs HTML without escaping it, allowing the partial’s markup to render correctly.
 
 Using partials reduces duplication: I can update shared content in one place instead of editing every page. I also personalised the footer and credited The Net Ninja’s course.
+
+### Adding shared styles
+
+I typed the code myself while following the tutorial. For this step, I copied the provided CSS from The Net Ninja’s `lesson-7` branch into a `<style>` block in `views/partials/head.ejs`. Earlier, I also copied a long block of sample text for the file and stream exercises.
+
+Every page includes the head partial, so the styles are shared across the site. They add the Noto Serif font, a centred layout, navigation and footer styling, and formatting for the create-blog form.
+
+This completes Lesson 7: my pages now use EJS templates, dynamic data, reusable partials and shared styling.
