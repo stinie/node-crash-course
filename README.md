@@ -92,3 +92,22 @@ The first installation created `package-lock.json` and `node_modules/`, which wa
 Using knowledge from a previous project, I added scripts: `npm start` runs the server, and `npm run dev` runs it with nodemon to restart automatically after code changes.
 
 When downloading a project or restoring it without `node_modules/`, I can run `npm install` to install the dependencies listed in `package.json`.
+
+## Lesson 6 — Express Apps
+
+I installed Express as a regular dependency and created `app.js` to replace the plain Node server.
+
+I practised handling GET requests with `app.get()`, sending HTML with `res.send()`, and serving HTML files with `res.sendFile()` using `__dirname` as the root.
+
+I added a redirect from `/about-us` to `/about` and placed a catch-all middleware after all routes to send the 404 page with status `404`.
+
+Because I installed nodemon locally, I use `npm run dev` instead of the instructor’s global `nodemon` command. I updated my scripts to run `app.js`:
+
+```json
+"scripts": {
+  "start": "node app.js",
+  "dev": "nodemon app.js"
+}
+```
+
+I deleted `server.js` after replacing its functionality with Express. The earlier implementation remains preserved on previous lesson branches.
