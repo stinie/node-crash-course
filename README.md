@@ -199,3 +199,11 @@ Calling `next()` passes control to the next matching middleware or route handler
 
 I kept the version without `next()` commented out as a reminder of what happens when control is not passed onward.
 
+### Third-party middleware: Morgan
+
+I installed Morgan with `npm install morgan` and registered it with `app.use()` to log HTTP requests. I tried its concise `"dev"` and minimal `"tiny"` formats.
+
+I kept my custom logging middleware commented out as a learning reference while replacing it with Morgan.
+
+The installation reported a moderate vulnerability in `minimatch`, a dependency of nodemon. I ran `npm audit` to inspect it and deferred the fix: the suggested `--force` command would downgrade nodemon to an older version with breaking changes. The warning remains unresolved.
+

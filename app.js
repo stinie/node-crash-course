@@ -1,6 +1,9 @@
 // Import the Express framework.
 const express = require("express");
 
+// Import Morgan, a middleware library for logging HTTP requests.
+const morgan = require("morgan");
+
 // Create an Express application.
 const app = express();
 
@@ -13,6 +16,12 @@ app.set("view engine", "ejs");
 // Start the server on port 3000.
 app.listen(3000);
 
+// Log HTTP requests using Morgan's concise "dev" format.
+// app.use(morgan("dev"));
+
+// Log HTTP requests using Morgan's minimal "tiny" format.
+app.use(morgan("tiny"));
+
 // Without next() or a response, this middleware logs the request but leaves it waiting.
 // app.use((req, res) => {
 //   console.log("new request made");
@@ -22,19 +31,19 @@ app.listen(3000);
 // });
 
 // Log the request, then call next() so Express can continue to the next matching handler.
-app.use((req, res, next) => {
-  console.log("new request made");
-  console.log("host: ", req.hostname);
-  console.log("path: ", req.path);
-  console.log("method: ", req.method);
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log("new request made");
+//   console.log("host: ", req.hostname);
+//   console.log("path: ", req.path);
+//   console.log("method: ", req.method);
+//   next();
+// });
 
 // Run after the previous middleware calls next(), then pass control onward with next().
-app.use((req, res, next) => {
-  console.log("the next middleware");
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log("the next middleware");
+//   next();
+// });
 
 
 
