@@ -138,3 +138,21 @@ I added a `/blogs/create` route and a `create.ejs` form with required title, sni
 ### Personal touches
 
 I named the site “Christine’s Code Journal” and added a personal tagline and About text to reflect my own learning journey.
+
+### Correcting documentation across branches
+
+I noticed that Lesson 3 was documented on `lesson-3` but missing from later READMEs. I restored the section separately on branches `lesson-4` through `lesson-7`, committing and pushing each correction.
+
+This taught me that updating one branch does not automatically update existing branches. I practised switching branches and chose to repeat the small edit manually rather than use merging or cherry-picking.
+
+### EJS syntax and dynamic titles
+
+I practised using `<% %>` to run JavaScript and `<%= %>` to display a value with a temporary `name` example in `index.ejs`, then removed it.
+
+I now pass a `title` from each route through the second argument of `res.render()` and display it in each EJS template:
+
+```html
+<title>Node.js Crash Course | <%= title %></title>
+```
+
+I deleted the old HTML files from `views/` and removed earlier commented-out code as I became comfortable with the EJS approach. Previous versions remain preserved in Git.
