@@ -16,6 +16,10 @@ app.set("view engine", "ejs");
 // Start the server on port 3000.
 app.listen(3000);
 
+// Serve files from "public" at the site root, so public/styles.css is available at /styles.css.
+app.use(express.static("public"));
+
+
 // Log HTTP requests using Morgan's concise "dev" format.
 // app.use(morgan("dev"));
 

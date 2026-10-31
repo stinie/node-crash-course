@@ -207,3 +207,10 @@ I kept my custom logging middleware commented out as a learning reference while 
 
 The installation reported a moderate vulnerability in `minimatch`, a dependency of nodemon. I ran `npm audit` to inspect it and deferred the fix: the suggested `--force` command would downgrade nodemon to an older version with breaking changes. The warning remains unresolved.
 
+### Serving static files
+
+I registered `express.static("public")` with `app.use()` to make files in `public/` accessible to the browser.
+
+I moved the CSS from the shared head partial into `public/styles.css` and linked it with `href="/styles.css"`. The URL leaves out `public` because Express uses that folder as the root for static files.
+
+This completes Lesson 8: I practised custom middleware, `next()`, request logging with Morgan, and serving static files with Express.
