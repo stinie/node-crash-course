@@ -52,6 +52,10 @@ I practised reading and writing files in chunks using streams. UTF-8 encoding gi
 
 I used `pipe()` to pass data from a readable stream to a writable stream. `createWriteStream()` creates the output file if it is missing or overwrites it if it exists.
 
+## Lesson 3 — Clients & Servers
+
+I created a server with Node.js’s built-in `http` module and listened for requests on `localhost:3000`. Each request runs a callback and logs a message. The server does not send a response yet.
+
 ## Lesson 4 - Requests & Responses
 
 ### Inspecting requests and sending HTML
