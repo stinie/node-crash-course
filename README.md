@@ -111,3 +111,26 @@ Because I installed nodemon locally, I use `npm run dev` instead of the instruct
 ```
 
 I deleted `server.js` after replacing its functionality with Express. The earlier implementation remains preserved on previous lesson branches.
+
+
+## Lesson 7 — View Engines (in progress)
+
+### Setting up EJS
+
+I installed EJS as a regular dependency:
+
+```bash
+npm install ejs
+```
+
+I registered it with `app.set("view engine", "ejs")`. Express looks for templates in `views/` by default; I also noted how to configure a different folder.
+
+### Rendering views
+
+I started replacing HTML file responses with `res.render()`, which renders an EJS template into HTML and sends it to the browser.
+
+I added a `/blogs/create` route and a `create.ejs` form with required title, snippet and body fields. The form is displayed only; saving posts comes later.
+
+### Personal touches
+
+I named the site “Christine’s Code Journal” and added a personal tagline and About text to reflect my own learning journey.
