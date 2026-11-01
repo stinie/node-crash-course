@@ -117,7 +117,7 @@ Because I installed nodemon locally, I use `npm run dev` instead of the instruct
 I deleted `server.js` after replacing its functionality with Express. The earlier implementation remains preserved on previous lesson branches.
 
 
-## Lesson 7 — View Engines (in progress)
+## Lesson 7 — View Engines
 
 ### Setting up EJS
 
