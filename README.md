@@ -260,3 +260,23 @@ I also corrected the promise chain: `.catch()` follows `.then()` to handle save 
 I replaced the hardcoded connection string with `process.env.MONGODB_URI` and used Node.js’s built-in `process.loadEnvFile()` to load it from my local `.env` file.
 
 The connection uses my application user’s credentials. `.env` is ignored by Git, so I can commit the code without including those credentials. The server starts on port 3000 after the database connection succeeds.
+
+### Inspecting saved documents
+
+I inspected my saved blogs in Atlas. Refreshing `/add-blog` created another document with the same content, but a different `_id` and timestamps. Each visit to this practice route saves a new blog.
+
+I also learned that inserting into a missing collection can create it automatically, provided the user has permission. Collection names need care: Mongoose uses `blogs` for the `Blog` model by default.
+
+### Retrieving blogs with the model
+
+I added `/all-blogs` using `Blog.find()` to retrieve all blog documents and send them to the browser as JSON.
+
+`Blog` is the model; `blog = new Blog(...)` is one document instance. `blog.save()` saves that document, while `Blog.find()` queries the collection.
+
+I then added `/single-blog` using `Blog.findById()`. My documents use MongoDB ObjectIds; Mongoose converts a valid ID string when querying. I replaced the example ID with an actual `_id` from my collection and successfully retrieved one blog.
+
+### Building debugging confidence
+
+I practised following my intuition and checking the result. I also learned that `node --check app.js` produces no output when the syntax check passes. The earlier syntax error and the example ID were separate issues.
+
+I started using code completion near the end of Lesson 9, while writing the /single-blog route. This helped me practise checking suggestions against my own data and understanding.

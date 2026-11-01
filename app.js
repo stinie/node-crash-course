@@ -43,6 +43,28 @@ app.get("/add-blog", (req, res) => {
 
 });
 
+// Retrieve all blog documents from MongoDB and send them to the browser.
+app.get("/all-blogs", (req, res) => {
+  Blog.find()
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+});
+
+// Retrieve one blog by its ID and send it to the browser.
+app.get("/single-blog", (req, res) => {
+  Blog.findById("6ae71b691cadfbe16f4708c4")
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 // Use EJS to render templates into HTML.
 app.set("view engine", "ejs");
