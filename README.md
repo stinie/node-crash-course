@@ -117,7 +117,7 @@ Because I installed nodemon locally, I use `npm run dev` instead of the instruct
 I deleted `server.js` after replacing its functionality with Express. The earlier implementation remains preserved on previous lesson branches.
 
 
-## Lesson 7 — View Engines (in progress)
+## Lesson 7 — View Engines
 
 ### Setting up EJS
 
@@ -187,7 +187,7 @@ Every page includes the head partial, so the styles are shared across the site. 
 
 This completes Lesson 7: my pages now use EJS templates, dynamic data, reusable partials and shared styling.
 
-## Lesson 8 — Middleware (in progress)
+## Lesson 8 — Middleware
 
 ### Middleware order and next()
 
@@ -214,3 +214,49 @@ I registered `express.static("public")` with `app.use()` to make files in `publi
 I moved the CSS from the shared head partial into `public/styles.css` and linked it with `href="/styles.css"`. The URL leaves out `public` because Express uses that folder as the root for static files.
 
 This completes Lesson 8: I practised custom middleware, `next()`, request logging with Morgan, and serving static files with Express.
+
+## Lesson 9 — MongoDB
+
+### Setting up MongoDB Atlas
+
+I used my existing Atlas account, enabled email MFA, and created a free cluster named `node-crash-course` on AWS in Frankfurt.
+
+The current Atlas interface differs from the tutorial. Automatic security setup added my IP address and created an administrator database user. I then created a separate application user, `node-crash-course-user`, with `readWrite` access limited to the `node-crash-course` database.
+
+I created that database with an empty `blogs` collection. I also renamed the downloaded credentials file to `.env` and confirmed that Git ignores it using `git check-ignore .env`.
+
+### Connecting with Mongoose
+
+I installed Mongoose with `npm install mongoose` and used `mongoose.connect(dbURI)` to connect successfully to Atlas.
+
+I moved `app.listen(3000)` into `.then()` so the server starts only after the database connection succeeds, and added `.catch()` to log connection errors. My version did not show the tutorial’s deprecation warnings, so I did not add its older connection options.
+
+### Creating a schema and model
+
+In `models/blog.js`, I defined a schema with three required string fields: `title`, `snippet` and `body`. Setting `timestamps: true` adds automatic `createdAt` and `updatedAt` fields.
+
+I created the model with `mongoose.model("Blog", blogSchema)`, exported it, and imported it into `app.js`. The `Blog` model works with the `blogs` collection.
+
+### Practising database operations
+
+I started a temporary `/add-blog` route that creates a blog document and calls `blog.save()`. The promise’s `.then()` sends the saved document back to the browser. I also learned that `.catch()` belongs on the promise chain after `.then()`, rather than on `res.send()`.
+
+### Selecting the database and saving a blog
+
+I saved my first blog with `blog.save()` and sent the saved document to the browser.
+
+At first, Atlas refused the insert into `test.blogs`. The tutorial specifies the database inside its connection string; mine had no database name, so it defaulted to `test`. My application user only has read/write access to `node-crash-course`.
+
+I selected the database explicitly:
+
+```js
+mongoose.connect(dbURI, { dbName: "node-crash-course" })
+```
+
+I also corrected the promise chain: `.catch()` follows `.then()` to handle save errors. Catching an error prevents an unhandled rejection; it does not fix the underlying database problem.
+
+### Keeping credentials outside the code
+
+I replaced the hardcoded connection string with `process.env.MONGODB_URI` and used Node.js’s built-in `process.loadEnvFile()` to load it from my local `.env` file.
+
+The connection uses my application user’s credentials. `.env` is ignored by Git, so I can commit the code without including those credentials. The server starts on port 3000 after the database connection succeeds.

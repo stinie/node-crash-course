@@ -4,8 +4,45 @@ const express = require("express");
 // Import Morgan, a middleware library for logging HTTP requests.
 const morgan = require("morgan");
 
+// Import Mongoose to connect to MongoDB and work with schemas and models.
+const mongoose = require("mongoose");
+
+// Import the Blog model to create and query blog documents in MongoDB.
+const Blog = require("./models/blog");
+
 // Create an Express application.
 const app = express();
+
+// // Load local environment variables from .env.
+process.loadEnvFile();
+
+// Read the MongoDB connection URI from the environment.
+const dbURI = process.env.MONGODB_URI;
+
+// Connect to node-crash-course, then start the server on port 3000.
+mongoose.connect(dbURI, { dbName: "node-crash-course" })
+  .then((result) => app.listen(3000))
+  .catch((err) => console.log(err));
+
+
+// Temporary routes for practising MongoDB operations with Mongoose.
+app.get("/add-blog", (req, res) => {
+  const blog = new Blog({
+    title: "Small steps into MongoDB",
+    snippet: "Connecting my code journal to a database, one step at a time.",
+    body: "Today I created a blog schema and model with Mongoose. After practising with sample arrays, I’m learning to store my blog posts in MongoDB. There are many new concepts, so I’m taking my time to understand each step. 🐢"
+  });
+
+  blog.save()
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+});
+
 
 // Use EJS to render templates into HTML.
 app.set("view engine", "ejs");
@@ -13,8 +50,6 @@ app.set("view engine", "ejs");
 // Optionally use a custom templates folder instead of the default "views" folder.
 // app.set("views", "myviews");
 
-// Start the server on port 3000.
-app.listen(3000);
 
 // Serve files from "public" at the site root, so public/styles.css is available at /styles.css.
 app.use(express.static("public"));
