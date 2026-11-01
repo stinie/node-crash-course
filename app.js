@@ -24,48 +24,6 @@ mongoose.connect(dbURI, { dbName: "node-crash-course" })
   .then((result) => app.listen(3000))
   .catch((err) => console.log(err));
 
-
-// Temporary routes for practising MongoDB operations with Mongoose.
-app.get("/add-blog", (req, res) => {
-  const blog = new Blog({
-    title: "Small steps into MongoDB",
-    snippet: "Connecting my code journal to a database, one step at a time.",
-    body: "Today I created a blog schema and model with Mongoose. After practising with sample arrays, I’m learning to store my blog posts in MongoDB. There are many new concepts, so I’m taking my time to understand each step. 🐢"
-  });
-
-  blog.save()
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-
-});
-
-// Retrieve all blog documents from MongoDB and send them to the browser.
-app.get("/all-blogs", (req, res) => {
-  Blog.find()
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-
-});
-
-// Retrieve one blog by its ID and send it to the browser.
-app.get("/single-blog", (req, res) => {
-  Blog.findById("6ae71b691cadfbe16f4708c4")
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
 // Use EJS to render templates into HTML.
 app.set("view engine", "ejs");
 
@@ -83,43 +41,9 @@ app.use(express.static("public"));
 // Log HTTP requests using Morgan's minimal "tiny" format.
 app.use(morgan("tiny"));
 
-// Without next() or a response, this middleware logs the request but leaves it waiting.
-// app.use((req, res) => {
-//   console.log("new request made");
-//   console.log("host: ", req.hostname);
-//   console.log("path: ", req.path);
-//   console.log("method: ", req.method);
-// });
-
-// Log the request, then call next() so Express can continue to the next matching handler.
-// app.use((req, res, next) => {
-//   console.log("new request made");
-//   console.log("host: ", req.hostname);
-//   console.log("path: ", req.path);
-//   console.log("method: ", req.method);
-//   next();
-// });
-
-// Run after the previous middleware calls next(), then pass control onward with next().
-// app.use((req, res, next) => {
-//   console.log("the next middleware");
-//   next();
-// });
-
-
-
-// Respond to GET requests for the homepage.
+// Redirect homepage requests to /blogs.
 app.get("/", (req, res) => {
-  const blogs = [
-    { title: "Yoshi finds eggs", snippet: "A little curiosity leads Yoshi to a colourful discovery." },
-    { title: "Mario finds stars", snippet: "Every star marks another small adventure completed." },
-    { title: "How to turtle pace", snippet: "Take your time, understand each step, and keep moving. 🐢" }
-  ];
-  res.render("index", {
-    title: "Home",
-    // Shorthand for blogs: blogs because the property and variable names match.
-    blogs
-  });
+  res.redirect("/blogs");
 });
 
 // Render views/about.ejs into HTML and send it to the browser.
@@ -129,6 +53,22 @@ app.get("/about", (req, res) => {
     title: "About"
   })
 });
+
+
+// Retrieve blogs newest first and render them in the index template.
+app.get("/blogs", (req, res) => {
+  Blog.find().sort({ createdAt: -1 })
+  .then((result) => { 
+    res.render("index", {
+      title: "All Blogs",
+      blogs: result
+    })
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+});
+
 
 // Render the create-blog page for GET requests to /blogs/create.
 app.get("/blogs/create", (req, res) => {

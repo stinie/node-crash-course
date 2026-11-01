@@ -280,3 +280,11 @@ I then added `/single-blog` using `Blog.findById()`. My documents use MongoDB Ob
 I practised following my intuition and checking the result. I also learned that `node --check app.js` produces no output when the syntax check passes. The earlier syntax error and the example ID were separate issues.
 
 I started using code completion near the end of Lesson 9, while writing the /single-blog route. This helped me practise checking suggestions against my own data and understanding.
+
+### Rendering blogs from MongoDB
+
+I replaced the sample blog array with documents retrieved from MongoDB. The homepage now redirects to `/blogs`, where `Blog.find()` fetches the blogs and passes them to `index.ejs` for rendering.
+
+I added `.sort({ createdAt: -1 })` to display the newest blogs first. The value `-1` means descending order.
+
+I removed the temporary `/add-blog`, `/all-blogs` and `/single-blog` practice routes. Their code remains preserved in earlier Git commits.
