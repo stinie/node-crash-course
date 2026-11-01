@@ -117,7 +117,7 @@ Because I installed nodemon locally, I use `npm run dev` instead of the instruct
 I deleted `server.js` after replacing its functionality with Express. The earlier implementation remains preserved on previous lesson branches.
 
 
-## Lesson 7 — View Engines (in progress)
+## Lesson 7 — View Engines
 
 ### Setting up EJS
 
@@ -187,7 +187,7 @@ Every page includes the head partial, so the styles are shared across the site. 
 
 This completes Lesson 7: my pages now use EJS templates, dynamic data, reusable partials and shared styling.
 
-## Lesson 8 — Middleware (in progress)
+## Lesson 8 — Middleware
 
 ### Middleware order and next()
 
