@@ -34,6 +34,9 @@ app.set("view engine", "ejs");
 // Serve files from "public" at the site root, so public/styles.css is available at /styles.css.
 app.use(express.static("public"));
 
+// Parse URL-encoded bodies (form submissions) into req.body.
+app.use(express.urlencoded({ extended: true })); 
+
 
 // Log HTTP requests using Morgan's concise "dev" format.
 // app.use(morgan("dev"));
@@ -69,6 +72,21 @@ app.get("/blogs", (req, res) => {
   });
 });
 
+// Handle POST requests to create a new blog.
+app.post("/blogs", (req, res) => {
+  // Create a new blog document using the Blog model.
+  const blog = new Blog(req.body); 
+
+  // Save the blog document to the database.
+  blog.save()
+    .then((result) => {
+      // Redirect to /blogs after successful save.
+      res.redirect("/blogs");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 // Render the create-blog page for GET requests to /blogs/create.
 app.get("/blogs/create", (req, res) => {

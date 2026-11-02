@@ -288,3 +288,19 @@ I replaced the sample blog array with documents retrieved from MongoDB. The home
 I added `.sort({ createdAt: -1 })` to display the newest blogs first. The value `-1` means descending order.
 
 I removed the temporary `/add-blog`, `/all-blogs` and `/single-blog` practice routes. Their code remains preserved in earlier Git commits.
+
+## Lesson 10 - Get, Post & Delete Requests
+
+### What I learned
+
+- **HTTP methods:** The same route can handle different requests. The method determines the action (`GET`, `POST`, `DELETE`).
+- **Route parameters:** `/blogs/:id` identifies a specific blog dynamically.
+- **HTML forms:** `action` defines the destination, `method` the request type, and `name` identifies the submitted fields.
+- **Middleware:** `express.urlencoded()` parses form submissions into `req.body`. Without it, `req.body` would be `undefined` in this example.
+
+### Connection to my Timeline
+
+I recognized that I'm already using `POST` to create and delete posts.
+
+**To revisit:** Explore replacing the POST-based deletion with an HTTP `DELETE` request, keeping in mind that HTML forms don't support DELETE directly.
+
