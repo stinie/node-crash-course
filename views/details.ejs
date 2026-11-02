@@ -1,0 +1,24 @@
+<html lang="en">
+
+ <%# Include the shared head partial as HTML. %>
+ <%- include("./partials/head.ejs") %>
+
+<body>
+  
+  <%# Include the shared navigation partial as HTML. %>
+  <%- include("./partials/nav.ejs") %>
+
+  <div class="details content">
+    <h2><%= blog.title %></h2>
+    <div class="content">
+      <p><%= blog.body %></p>
+    </div>
+    <a class="delete" data-doc="<%= blog._id %>">delete</a>
+  </div>
+
+  <%# Include the shared footer partial as HTML. %>
+  <%- include("./partials/footer.ejs") %>
+
+</body>
+
+</html>

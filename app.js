@@ -88,6 +88,22 @@ app.post("/blogs", (req, res) => {
     });
 });
 
+// Retrieve a specific blog by its ID and render the details page.
+app.get("/blogs/:id", (req, res) => {
+  const id = req.params.id;
+
+  Blog.findById(id)
+    .then((result) => {
+      res.render("details", {
+        blog: result,
+        title: "Blog Details"
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 // Render the create-blog page for GET requests to /blogs/create.
 app.get("/blogs/create", (req, res) => {
   // res.render("create");

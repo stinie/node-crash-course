@@ -304,3 +304,10 @@ I recognized that I'm already using `POST` to create and delete posts.
 
 **To revisit:** Explore replacing the POST-based deletion with an HTTP `DELETE` request, keeping in mind that HTML forms don't support DELETE directly.
 
+### Route Parameters — Aha Moment
+
+- `:id` is a dynamic part of a route, such as `/blogs/:id`.
+- `req.params.id` retrieves that value from the URL.
+- `Blog.findById(id)` uses it to find the corresponding blog in MongoDB.
+
+**Discovery:** One dynamic route can handle individual blogs without defining a separate route for each one.
