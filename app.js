@@ -104,6 +104,19 @@ app.get("/blogs/:id", (req, res) => {
     });
 });
 
+// Delete a specific blog by its ID and return a redirect URL.
+app.delete("/blogs/:id", (req, res) => {
+  const id = req.params.id;
+
+  Blog.findByIdAndDelete(id)
+    .then((result) => {
+      res.json({ redirect: "/blogs" });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 // Render the create-blog page for GET requests to /blogs/create.
 app.get("/blogs/create", (req, res) => {
   // res.render("create");

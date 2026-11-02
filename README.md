@@ -311,3 +311,21 @@ I recognized that I'm already using `POST` to create and delete posts.
 - `Blog.findById(id)` uses it to find the corresponding blog in MongoDB.
 
 **Discovery:** One dynamic route can handle individual blogs without defining a separate route for each one.
+
+### DELETE Requests — AJAX with Fetch
+
+**Discovery:** HTML forms only support GET and POST directly, but JavaScript's `fetch()` API allows us to send a DELETE request.
+
+- **`data-doc`** stores the blog's ID in a custom HTML attribute.
+- **`dataset.doc`** retrieves that ID in JavaScript.
+- **`fetch()`** sends an asynchronous DELETE request to `/blogs/:id`.
+- **`req.params.id`** retrieves the ID on the backend.
+- **`Blog.findByIdAndDelete(id)`** deletes the corresponding document from MongoDB.
+- **`res.json({ redirect: "/blogs" })`** sends a JSON response.
+- **`window.location.href`** redirects the browser after receiving that response.
+
+This is an example of **AJAX (Asynchronous JavaScript and XML)**. Despite its name, modern AJAX commonly uses JSON instead of XML.
+
+**Aha moment:** Unlike a traditional form submission, `fetch()` communicates with the server without automatically navigating away from the current page. JavaScript handles the response and decides what happens next.
+
+**Connection to my Timeline:** My current deletion uses POST. I could now explore using `fetch()` with DELETE instead. If I wanted to :-)
