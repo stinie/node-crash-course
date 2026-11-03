@@ -329,3 +329,26 @@ This is an example of **AJAX (Asynchronous JavaScript and XML)**. Despite its na
 **Aha moment:** Unlike a traditional form submission, `fetch()` communicates with the server without automatically navigating away from the current page. JavaScript handles the response and decides what happens next.
 
 **Connection to my Timeline:** My current deletion uses POST. I could now explore using `fetch()` with DELETE instead. If I wanted to :-)
+
+
+## Lesson 11 - Express Router & MVC
+
+### Aha — Separating Routes
+
+I've already worked with routers and controllers in my Timeline project. This lesson reinforces that understanding through a slightly different structure.
+
+I moved all blog-related routes and their handler functions from `app.js` into a separate file: `routes/blogRoutes.js`.
+
+**The flow in this lesson:**
+
+`app.js` → `routes/blogRoutes.js` → route handler → Blog model / response
+
+- **`express.Router()`** creates a separate router for related routes.
+- **`module.exports`** makes the router available to other modules.
+- **`require()`** imports that exported router into `app.js`.
+- **`app.use(blogRoutes)`** connects the router to the Express application.
+
+**My discovery:** Exporting something doesn't make it globally available. Another module must explicitly import it with `require()`. Only what is exported becomes accessible through that import.
+
+In my Timeline, I've taken this further by separating the handler functions into a controller.
+

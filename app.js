@@ -7,8 +7,8 @@ const morgan = require("morgan");
 // Import Mongoose to connect to MongoDB and work with schemas and models.
 const mongoose = require("mongoose");
 
-// Import the Blog model to create and query blog documents in MongoDB.
-const Blog = require("./models/blog");
+// Import the blogRoutes module, which defines routes for handling blog-related requests.
+const blogRoutes = require("./routes/blogRoutes");
 
 // Create an Express application.
 const app = express();
@@ -27,19 +27,12 @@ mongoose.connect(dbURI, { dbName: "node-crash-course" })
 // Use EJS to render templates into HTML.
 app.set("view engine", "ejs");
 
-// Optionally use a custom templates folder instead of the default "views" folder.
-// app.set("views", "myviews");
-
 
 // Serve files from "public" at the site root, so public/styles.css is available at /styles.css.
 app.use(express.static("public"));
 
 // Parse URL-encoded bodies (form submissions) into req.body.
 app.use(express.urlencoded({ extended: true })); 
-
-
-// Log HTTP requests using Morgan's concise "dev" format.
-// app.use(morgan("dev"));
 
 // Log HTTP requests using Morgan's minimal "tiny" format.
 app.use(morgan("tiny"));
@@ -58,72 +51,9 @@ app.get("/about", (req, res) => {
 });
 
 
-// Retrieve blogs newest first and render them in the index template.
-app.get("/blogs", (req, res) => {
-  Blog.find().sort({ createdAt: -1 })
-  .then((result) => { 
-    res.render("index", {
-      title: "All Blogs",
-      blogs: result
-    })
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-});
+// Blog routes are defined in a separate file, so use them here.
+app.use(blogRoutes);
 
-// Handle POST requests to create a new blog.
-app.post("/blogs", (req, res) => {
-  // Create a new blog document using the Blog model.
-  const blog = new Blog(req.body); 
-
-  // Save the blog document to the database.
-  blog.save()
-    .then((result) => {
-      // Redirect to /blogs after successful save.
-      res.redirect("/blogs");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
-// Retrieve a specific blog by its ID and render the details page.
-app.get("/blogs/:id", (req, res) => {
-  const id = req.params.id;
-
-  Blog.findById(id)
-    .then((result) => {
-      res.render("details", {
-        blog: result,
-        title: "Blog Details"
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
-// Delete a specific blog by its ID and return a redirect URL.
-app.delete("/blogs/:id", (req, res) => {
-  const id = req.params.id;
-
-  Blog.findByIdAndDelete(id)
-    .then((result) => {
-      res.json({ redirect: "/blogs" });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
-// Render the create-blog page for GET requests to /blogs/create.
-app.get("/blogs/create", (req, res) => {
-  // res.render("create");
-  res.render("create", {
-    title: "Create a new Blog"
-  })
-});
 
 // Send the 404 page with status 404 for unmatched requests. Keep this after all routes.
 // Render views/404.ejs into HTML and send it to the browser.
