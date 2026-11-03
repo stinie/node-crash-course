@@ -6,7 +6,7 @@ const Blog = require("../models/blog");
 const blog_index = (req, res) => {
   Blog.find().sort({ createdAt: -1 })
   .then((result) => { 
-    res.render("index", {
+    res.render("blogs/index", {
       title: "All Blogs",
       blogs: result
     })
@@ -18,8 +18,7 @@ const blog_index = (req, res) => {
 
 // Render the create-blog page for GET requests to /create.
 const blog_create_get =  (req, res) => {
-  // res.render("create");
-  res.render("create", {
+  res.render("blogs/create", {
     title: "Create a new Blog"
   })
 };
@@ -46,7 +45,7 @@ const blog_details = (req, res) => {
 
   Blog.findById(id)
     .then((result) => {
-      res.render("details", {
+      res.render("blogs/details", {
         blog: result,
         title: "Blog Details"
       });

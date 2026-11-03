@@ -387,3 +387,11 @@ I extracted the handler functions from `blogRoutes.js` into a separate `controll
 **My discovery:** The router no longer needs to contain the request-handling logic. It only defines which controller function handles each request.
 
 This is the same separation of responsibilities I've already implemented in my Timeline project, now reinforced through the MVC lesson.
+
+### Organizing Views
+
+I moved the blog-related EJS templates into a dedicated `views/blogs/` folder.
+
+This required updating the render paths in `blogController.js` and the partial include paths in the EJS templates.
+
+**My discovery:** When reorganizing views, I need to update both the controller's `res.render()` paths and the templates' `<%- include() %>` paths so everything continues to work.
