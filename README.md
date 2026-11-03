@@ -370,3 +370,20 @@ For example:
 **My discovery:** Scoping makes routes cleaner, reduces repetition, and improves reusability. I can change the URL prefix in one place without rewriting all the routes inside the router.
 
 I made these changes during the code-along, and my application works again!
+
+### Aha — Separating Routes and Controllers (MVC)
+
+I extracted the handler functions from `blogRoutes.js` into a separate `controllers/blogController.js` file.
+
+**The updated request flow:**
+
+`app.js` → `blogRoutes.js` → `blogController.js` → `Blog model` → `MongoDB`
+
+- **`app.js`** mounts the router under `/blogs`.
+- **`blogRoutes.js`** maps HTTP methods and URLs to controller functions.
+- **`blogController.js`** contains the handler functions that process requests and generate responses.
+- **`Blog model`** provides access to blog documents in MongoDB.
+
+**My discovery:** The router no longer needs to contain the request-handling logic. It only defines which controller function handles each request.
+
+This is the same separation of responsibilities I've already implemented in my Timeline project, now reinforced through the MVC lesson.

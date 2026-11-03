@@ -31,7 +31,7 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 
 // Parse URL-encoded bodies (form submissions) into req.body.
-app.use(express.urlencoded({ extended: true })); 
+app.use(express.urlencoded({ extended: true }));
 
 // Log HTTP requests using Morgan's minimal "tiny" format.
 app.use(morgan("tiny"));
