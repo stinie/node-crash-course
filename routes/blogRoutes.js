@@ -7,8 +7,8 @@ const router = express.Router();
 // Import the Blog model to create and query blog documents in MongoDB.
 const Blog = require("../models/blog");
 
-// Render the create-blog page for GET requests to /blogs/create.
-router.get("/blogs/create", (req, res) => {
+// Render the create-blog page for GET requests to /create.
+router.get("/create", (req, res) => {
   // res.render("create");
   res.render("create", {
     title: "Create a new Blog"
@@ -16,7 +16,7 @@ router.get("/blogs/create", (req, res) => {
 });
 
 // Retrieve blogs newest first and render them in the index template.
-router.get("/blogs", (req, res) => {
+router.get("/", (req, res) => {
   Blog.find().sort({ createdAt: -1 })
   .then((result) => { 
     res.render("index", {
@@ -30,7 +30,7 @@ router.get("/blogs", (req, res) => {
 });
 
 // Handle POST requests to create a new blog.
-router.post("/blogs", (req, res) => {
+router.post("/", (req, res) => {
   // Create a new blog document using the Blog model.
   const blog = new Blog(req.body); 
 
@@ -46,7 +46,7 @@ router.post("/blogs", (req, res) => {
 });
 
 // Retrieve a specific blog by its ID and render the details page.
-router.get("/blogs/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   const id = req.params.id;
 
   Blog.findById(id)
@@ -62,7 +62,7 @@ router.get("/blogs/:id", (req, res) => {
 });
 
 // Delete a specific blog by its ID and return a redirect URL.
-router.delete("/blogs/:id", (req, res) => {
+router.delete("/:id", (req, res) => {
   const id = req.params.id;
 
   Blog.findByIdAndDelete(id)

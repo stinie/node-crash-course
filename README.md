@@ -352,3 +352,21 @@ I moved all blog-related routes and their handler functions from `app.js` into a
 
 In my Timeline, I've taken this further by separating the handler functions into a controller.
 
+### Aha — Scoping Routes for Reusability
+
+I learned how to **scope an Express Router** by giving it a shared URL prefix in `app.js`.
+
+```javascript
+app.use("/blogs", blogRoutes);
+```
+
+This allows me to remove the repeated `/blogs` prefix from individual routes in `blogRoutes.js`.
+
+For example:
+
+- `router.get("/create", ...)` becomes `/blogs/create`
+- `router.get("/:id", ...)` becomes `/blogs/:id`
+
+**My discovery:** Scoping makes routes cleaner, reduces repetition, and improves reusability. I can change the URL prefix in one place without rewriting all the routes inside the router.
+
+I made these changes during the code-along, and my application works again!

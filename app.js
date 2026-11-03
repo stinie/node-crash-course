@@ -27,7 +27,6 @@ mongoose.connect(dbURI, { dbName: "node-crash-course" })
 // Use EJS to render templates into HTML.
 app.set("view engine", "ejs");
 
-
 // Serve files from "public" at the site root, so public/styles.css is available at /styles.css.
 app.use(express.static("public"));
 
@@ -50,10 +49,8 @@ app.get("/about", (req, res) => {
   })
 });
 
-
-// Blog routes are defined in a separate file, so use them here.
-app.use(blogRoutes);
-
+// Scope all blog routes under the /blogs URL prefix.
+app.use("/blogs", blogRoutes);
 
 // Send the 404 page with status 404 for unmatched requests. Keep this after all routes.
 // Render views/404.ejs into HTML and send it to the browser.
